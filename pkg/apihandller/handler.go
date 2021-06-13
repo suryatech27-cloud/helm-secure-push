@@ -30,4 +30,8 @@ func handleapiRequest() string {
 
 	//we need to call script function execute the script
 
+	output := script.executeShellScript(username, password, reponame, tarfile, provfile)
+
+	return output
+
 }
