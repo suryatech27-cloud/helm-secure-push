@@ -39,11 +39,14 @@ func handleapiRequest() string {
 }
 
 func executeShellScript(username string, password string, reponame string, tarfile string, provfile string) string {
-	fmt.Println("Connecting to the Harbor Api .........")
+	fmt.Println("Connecting to the Harbor Api ........." + username)
 
 	//executing shell script using os/exec
+	//var script_cmd string = "./secure-push.sh --username " + username + " --password " + password + " --chart-tgz-file " + tarfile + " --prov-file " + provfile + " --repo-name " + reponame
 
-	cmd, err := exec.Command("/bin/bash", "secure-push.sh --username "+username+" --password "+password+" --chart-tgz-file "+tarfile+" --prov-file "+provfile+" --repo-name "+reponame).Output()
+	//fmt.Println(script_cmd)
+
+	cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
 
 	if err != nil {
 		log.Fatal(err)
@@ -58,5 +61,5 @@ func executeShellScript(username string, password string, reponame string, tarfi
 
 func main() {
 	response := handleapiRequest()
-	fmt.Println("Status : " + response)
+	fmt.Println(response)
 }
