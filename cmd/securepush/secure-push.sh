@@ -30,7 +30,7 @@ done
 authtoken=$(echo -n $uname:$psword | base64)
 
 #echo "username :" $uname
-#echo "password : " $psword
+#echo "password : ***********"
 
 
 echo "Your packaged Signed  chart is :" $chartfile
