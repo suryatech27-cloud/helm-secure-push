@@ -29,8 +29,8 @@ done
 #Encoding the username with Base64 for Authorization
 authtoken=$(echo -n $uname:$psword | base64)
 
-echo "username :" $uname
-echo "password : " $psword
+#echo "username :" $uname
+#echo "password : " $psword
 
 
 echo "Your packaged Signed  chart is :" $chartfile
