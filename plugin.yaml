@@ -1,5 +1,5 @@
 name: "secure-push"
-version: "0.1.0"
+version: "1.1.0"
 usage: "Push the signed chart to the repo using api"
 description: "Push chart package with user-defined values"
-command: "$HELM_PLUGIN_DIR/scripts/api-push.sh"
+command: "$HELM_PLUGIN_DIR/bin/securepush"
