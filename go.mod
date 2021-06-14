@@ -1,3 +1,3 @@
-module github.com/suryatech27-cloud/Helm-Secure-Push
+module github.com/suryatech27-cloud/helm-secure-push
 
 go 1.16
