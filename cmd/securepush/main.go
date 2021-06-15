@@ -9,7 +9,7 @@ import (
 
 func handleapiRequest() string {
 
-	fmt.Println("Push Process Initiated .........................")
+	//fmt.Println("Push Process Initiated .........................")
 
 	//flag variable declaration
 	var username string
@@ -19,10 +19,10 @@ func handleapiRequest() string {
 	var provfile string
 
 	//Variable Initialization for flag
-	flag.StringVar(&username, "u", "svc_npharboresrs", "Harbor Accessible username")
-	flag.StringVar(&password, "p", "D*9z%cxAJBy7e?68F0vGIu3+", "Harbor Accessible Password")
-	flag.StringVar(&reponame, "repo", "esrs", "Specified your chart repository name")
-	flag.StringVar(&tarfile, "tarfile", "foo.tgz", "Generated secured chart package (.tgz)")
+	flag.StringVar(&username, "u", "", "username")
+	flag.StringVar(&password, "p", "", "Password")
+	flag.StringVar(&reponame, "repo", "", "Specified your chart repository name")
+	flag.StringVar(&tarfile, "chart", "foo.tgz", "Generated secured chart package (.tgz)")
 	flag.StringVar(&provfile, "prov", "foo.tgz.prov", "Generated chart provenance file (.prov)")
 
 	//Parsing all the flag value
@@ -38,14 +38,11 @@ func handleapiRequest() string {
 
 }
 
+//function responsible executing the shell script
 func executeShellScript(username string, password string, reponame string, tarfile string, provfile string) string {
-	fmt.Println("Connecting to the Harbor Api .......................")
+	//fmt.Println("Connecting to the Harbor Api .......................")
 
-	//executing shell script using os/exec
-	//var script_cmd string = "./secure-push.sh --username " + username + " --password " + password + " --chart-tgz-file " + tarfile + " --prov-file " + provfile + " --repo-name " + reponame
-
-	//fmt.Println(script_cmd)
-
+	//executing bash script
 	cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
 
 	if err != nil {
