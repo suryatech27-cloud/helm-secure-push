@@ -4,4 +4,4 @@ usage: "Push the signed chart to the repo using api"
 description: "Push chart package with user-defined values"
 command: "$HELM_PLUGIN_DIR/bin/securepush"
 hooks:
-  install: "cd $HELM_PLUGIN_DIR; scripts/install_secure-push.sh"
+  install: "cd $HELM_PLUGIN_DIR; scripts/install-secure-push.sh"
