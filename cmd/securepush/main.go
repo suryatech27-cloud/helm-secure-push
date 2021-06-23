@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"runtime"
 )
 
 func handleapiRequest() string {
@@ -41,18 +42,28 @@ func handleapiRequest() string {
 //function responsible executing the shell script
 func executeShellScript(username string, password string, reponame string, tarfile string, provfile string) string {
 	//fmt.Println("Connecting to the Harbor Api .......................")
+	os := runtime.GOOS
+	switch os {
+	case "windows":
+		cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Printf("Error %s", err)
+		}
+		output := string(cmd)
 
-	//executing bash script
-	cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
+		return output
+	default:
+		cmd, err := exec.Command("bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
+		if err != nil {
+			log.Fatal(err)
+			fmt.Printf("Error %s", err)
+		}
+		output := string(cmd)
 
-	if err != nil {
-		log.Fatal(err)
-		fmt.Printf("Error %s", err)
+		return output
+
 	}
-
-	output := string(cmd)
-
-	return output
 
 }
 
