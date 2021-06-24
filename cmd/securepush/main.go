@@ -67,6 +67,24 @@ func executeShellScript(username string, password string, reponame string, tarfi
 
 }
 
+// func setEnvironmentPath() {
+// 	os := runtime.GOOS
+// 	app := "helm"
+// 	flg := "env"
+// 	arg := "HELM_PLUGINS"
+// 	switch os {
+// 	case "windows":
+// 		cmd, err := exec.Command(app,flg,arg).Output()
+// 		if err != nil {
+// 			log.Fatal(err)
+// 			fmt.Printf("Error %s" , err)
+// 		}
+// 		SET_BIN_PATH := string(cmd)
+// 		fmt.Println(SET_BIN_PATH)
+// 	}
+
+// }
+
 func main() {
 	response := handleapiRequest()
 	fmt.Println(response)
