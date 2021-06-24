@@ -31,6 +31,7 @@ if [ $OS == "windows" ]; then
         #echo $PUSH_BIN_PATH
 
         cd $DIR'/helm-secure-push/bin'; env GOOS=windows GOARCH=amd64 go build ../cmd/securepush
+        PATH=$PATH:$DIR'/helm-secure-push/bin
 else
   echo "Installed Successfully Done."
 fi
