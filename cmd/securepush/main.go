@@ -45,7 +45,7 @@ func executeShellScript(username string, password string, reponame string, tarfi
 	os := runtime.GOOS
 	switch os {
 	case "windows":
-		cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
+		cmd, err := exec.Command("bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
 		if err != nil {
 			log.Fatal(err)
 			fmt.Printf("Error %s", err)
@@ -54,7 +54,7 @@ func executeShellScript(username string, password string, reponame string, tarfi
 
 		return output
 	default:
-		cmd, err := exec.Command("bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
+		cmd, err := exec.Command("/bin/bash", "secure-push.sh", "--username", username, "--password", password, "--chart-tgz-file", tarfile, "--prov-file", provfile, "--repo-name", reponame).Output()
 		if err != nil {
 			log.Fatal(err)
 			fmt.Printf("Error %s", err)
