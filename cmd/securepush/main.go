@@ -87,5 +87,5 @@ func executeShellScript(username string, password string, reponame string, tarfi
 
 func main() {
 	response := handleapiRequest()
-	fmt.Println(response)
+	fmt.Printf(response)
 }
