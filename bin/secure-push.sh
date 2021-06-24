@@ -52,7 +52,7 @@ fi
 
 if [ $httpStatusCode -eq 201 ]; then
 
-        echo "Done" 
+        echo $httpresponse
 else
         echo "Error Status :" $httpresponse
 fi
