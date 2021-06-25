@@ -37,7 +37,9 @@ elif [ $OS == 'linux']; then
   sudo source ~/.bashrc
   echo "Installed Successfully Done."
 else 
-  echo "Environmnet setup failed due to other OS implementarion".
+  sudo echo 'export PATH=$PATH:$DIR/helm-secure-push/bin' >> ~/.bashrc
+  sudo source ~/.bashrc
+  echo "Installed Successfully Done."
 fi
 
 #finish
