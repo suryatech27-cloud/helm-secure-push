@@ -32,7 +32,7 @@ if [ $OS == "windows" ]; then
 
         cd $DIR'/helm-secure-push/bin'; env GOOS=windows GOARCH=amd64 go build ../cmd/securepush
         cd 'C:/Windows/System32'; setx path "$DIR\helm-secure-push\bin"
-else if [ $OS == 'linux']; then
+elif [ $OS == 'linux']; then
   sudo echo 'export PATH=$PATH:$DIR/helm-secure-push/bin' >> ~/.bashrc
   sudo source ~/.bashrc
   echo "Installed Successfully Done."
