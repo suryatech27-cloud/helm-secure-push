@@ -31,9 +31,13 @@ if [ $OS == "windows" ]; then
         #echo $PUSH_BIN_PATH
 
         cd $DIR'/helm-secure-push/bin'; env GOOS=windows GOARCH=amd64 go build ../cmd/securepush
-        cd 'C:/Windows/System32'; setx path "$DIR'\helm-secure-push\bin'"
-else
+        cd 'C:/Windows/System32'; setx path "$DIR\helm-secure-push\bin"
+else if [ $OS == 'linux']; then
+  sudo echo 'export PATH=$PATH:$DIR/helm-secure-push/bin' >> ~/.bashrc
+  sudo source ~/.bashrc
   echo "Installed Successfully Done."
+else 
+  echo "Environmnet setup failed due to other OS implementarion".
 fi
 
 #finish
