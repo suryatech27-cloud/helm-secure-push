@@ -37,25 +37,14 @@ authtoken=$(echo -n $uname:$psword | base64)
 
 #echo "Your Provenance file is :" $provfile
 
-httpresponse=$(curl -s -w '%{response_code}' -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
+httpresponse=$(curl -s -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
 
 #httpresponse=$(curl $verbose -s -u ":" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile" -X POST $repoUrl)
 
 # get the length of the response
 responseLength=`echo $httpresponse| wc -c`
 
-if [ $responseLength -gt 3 ]; then
-        httpStatusCode=${httpresponse:(-3)}
- else
-        httpStatusCode=$httpresponse
-fi
-
-if [ $httpStatusCode -eq 201 ]; then
-
-        echo "Done" 
-else
-        echo "Error Status :" $httpresponse
-fi
+echo $httpresponse
 
 #Finish
 
