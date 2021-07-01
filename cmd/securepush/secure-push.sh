@@ -29,22 +29,25 @@ done
 #Encoding the username with Base64 for Authorization
 authtoken=$(echo -n $uname:$psword | base64)
 
-#echo "username :" $uname
-#echo "password : " $psword
+#Creating file digest for future
+chartdigest=$(echo -n "$chartfile" | md5sum)
+provdigest=$(echo -n "$provfile" | md5sum)
 
-
-#echo "Your packaged Signed  chart is :" $chartfile
-
-#echo "Your Provenance file is :" $provfile
+#Performing curl operation
 
 httpresponse=$(curl -s -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
 
 #httpresponse=$(curl $verbose -s -u ":" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile" -X POST $repoUrl)
 
 # get the length of the response
-responseLength=`echo $httpresponse| wc -c`
+# responseLength=`echo $httpresponse| wc -c`
 
-echo $httpresponse
+# echo $httpresponse
+echo "Creating file digest :" $chartdigest$provdigest
+echo "Server : https://harbor.dell.com/api/chartrepo/$repo/charts"
+echo "Authorization : " $authtoken
+echo "Header Content : " $chartfile "/" $provfile 
+echo "Response : "$httpresponse
 
 #Finish
 

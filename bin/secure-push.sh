@@ -29,33 +29,37 @@ done
 #Encoding the username with Base64 for Authorization
 authtoken=$(echo -n $uname:$psword | base64)
 
-#echo "username :" $uname
-#echo "password : " $psword
 
+#Creating file digest for future
+chartdigest=$(echo -n "$chartfile" | md5sum)
+provdigest=$(echo -n "$provfile" | md5sum)
 
-#echo "Your packaged Signed  chart is :" $chartfile
-
-#echo "Your Provenance file is :" $provfile
+#Performing curl opertaion
 
 httpresponse=$(curl -s -w '%{response_code}' -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
 
 #httpresponse=$(curl $verbose -s -u ":" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile" -X POST $repoUrl)
 
-# get the length of the response
-responseLength=`echo $httpresponse| wc -c`
+# # get the length of the response
+# responseLength=`echo $httpresponse| wc -c`
 
-if [ $responseLength -gt 3 ]; then
-        httpStatusCode=${httpresponse:(-3)}
- else
-        httpStatusCode=$httpresponse
-fi
+# if [ $responseLength -gt 3 ]; then
+#         httpStatusCode=${httpresponse:(-3)}
+#  else
+#         httpStatusCode=$httpresponse
+# fi
 
-if [ $httpStatusCode -eq 201 ]; then
+# if [ $httpStatusCode -eq 201 ]; then
 
-        echo $httpresponse
-else
-        echo "Error Status :" $httpresponse
-fi
+#         echo $httpresponse
+# else
+#         echo "Error Status :" $httpresponse
+# fi
+echo "Creating file digest :" $chartdigest$provdigest
+echo "Server : https://harbor.dell.com/api/chartrepo/$repo/charts"
+echo "Authorization : " $authtoken
+echo "Header Content : " $chartfile "/" $provfile 
+echo "Response : "$httpresponse
 
 #Finish
 
