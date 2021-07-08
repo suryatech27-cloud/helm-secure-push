@@ -36,7 +36,7 @@ provdigest=$(echo -n "$provfile" | md5sum)
 
 #Performing curl opertaion
 
-httpresponse=$(curl -s -w '%{response_code}' -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
+httpresponse=$(curl -s -k POST "https://harbor.dell.com/api/chartrepo/$repo/charts" -H "authorization: Basic $authtoken" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile")
 
 #httpresponse=$(curl $verbose -s -u ":" -H "Content-Type: multipart/form-data" -F "chart=@$chartfile; type=application/x-compressed-tar" -F "prov=@$provfile" -X POST $repoUrl)
 
